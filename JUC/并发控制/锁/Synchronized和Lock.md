@@ -156,9 +156,13 @@ public class ConditionWaitNotify {
 
 * 公平锁必须老老实实丢到AQS队尾去排队, 而非公平锁可以直接尝试获取一次锁, 取不到再丢队尾
 
-## synchronized和ReentrantLock的区别
+## synchronized和ReentrantLock的异同
 
+* synchronied是java关键字, 其实现是由jvm完成的, 在竞争烈度不同的时候会有不同的实现, 其中重量级锁会涉及内核态用户态切换; Lock是AQS实现的, 完全在用户态实现, 不需要切换
+* synchronized没有办法控制等锁超时机制, 而Lock可以控制等锁超时, 也可以使用tryLock仅尝试一下能不能拿到锁
+* synchronized的锁释放是jvm控制的, 而lock需要自己注意异常等情况的锁释放
+* 低烈度的竞争情况下synchronized性能略优于Lock, 高竞争烈度的情况下Lock的吞吐量会高于synchronized
 
 ## 其他
 
-* 上面的demo代码实现的任务: 两个线程交替打印1-100, 还可以考虑使用信号量, BlockingQueue(size=1),LockSupport.park/unpark; CyclicBarrier/ CountDownLatch等方式实现; 后续可以补充实现
+* 上面的demo代码实现的任务: 两个线程交替打印1-100, 还可以考虑使用信号量, BlockingQueue(size=1),LockSupport.park/unpark等方式实现; 后续可以补充实现
