@@ -73,7 +73,7 @@ public class SynchronizedWaitNotify {
 
 ## Lock
 
-* Lock是juc中提供的一个接口, 常见实现类有ReentrantLock, ReadLock, WriteLock, FairLock, UnFairLock
+* Lock是juc中提供的一个接口, 常见实现类有ReentrantLock, ReadWriteLock, FairLock, UnFairLock
 * Lock是基于AQS实现的, 完全在用户态实现, 相比于synchroned中可能的重量级锁形态, 不需要内核态用户态切换
   * 所以可以看出在竞争并不激烈的时候synchronized的吞吐量可能高于lock, 而在高竞争烈度的情况下, Lock的吞吐量会高于synchronized
 
