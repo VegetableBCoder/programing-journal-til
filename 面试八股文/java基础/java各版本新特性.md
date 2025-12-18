@@ -9,7 +9,7 @@
 
 # Java 11
 
-* G1正式作为默认收集器
+* G1优化正式作为默认收集器
 * 引入ZGC
 * TLS 1.3支持
 * 抛弃了Javax的包, 后续维护交给了jarkta,
@@ -24,3 +24,18 @@
 
 * 虚拟线程
 * ZGC支持分代
+
+## Java25
+
+* ZGC优化
+* 虚拟线程优化
+* 废弃32bit jvm
+* shenandoah分代? 反正oracle jdk没有这玩意儿
+* 
+
+## 最近在研究啥新东西?
+
+* springboot4.0+jdk25+GraalVM打包减少内存占用
+* springcloud k8s
+* springai
+* 用raft手撸一个类似于zookeeper的demo

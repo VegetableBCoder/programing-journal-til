@@ -23,7 +23,7 @@
 
 ### get resize并发
   
-* 当出现hash<0时, 说明正在迁移, 调用ForwardNode的find方法进行处理, 跳去新表找
+* 当出现hash<0时, 说明正在迁移, 调用ForwardNodef的ind方法进行处理, 跳去新表找
 
 ## 扩容
 

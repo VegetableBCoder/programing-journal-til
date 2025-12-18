@@ -34,6 +34,19 @@
   * 挂掉的节点恢复时通过binlog拉平和其他节点的差距
   * 再搭配proxySQL之类的中间件做读写分离; 让proxysql监控performance_schema里面的replication_group_members表
 
+### mgr单主模式
+
+* 客户端将事务写请求发给Primary
+* primary修改BufferPool, 生成redo & undo log, 准备binlog; 此时事务尚未提交
+* 广播事务内容到其他节点(GCS): GTID,  write set, 
+* Sencondary节点接收并根据write set判断是否有事务冲突
+* sencondary返回primary ack/failed
+* primary接收并计数, 自己计算为认证成功, 如果总共有一半的节点认证成功则事务可以提交
+* primary提交事务
+* 广播事务提交通知
+* secondary提交事务, 更新自己已执行的事务列表
+* primary响应客户端事务提交成功
+
 ## 读写分离
 
 * 我们目前是用ProxySQL配置规则去做的
